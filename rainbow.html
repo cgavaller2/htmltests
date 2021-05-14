@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<title>Clock</title>
+<html>
+    <style>
+    @font-face { 
+        font-family: retro;
+        src: url('ka1.TTF'); 
+    }
+
+    @font-face { 
+        font-family: sevensegment;
+        src: url('sevensegment.TTF'); 
+    }
+
+    sitetitle {
+        font-family: retro;
+        font-size: 48px;
+    }
+
+    clock {
+        font-family: sevensegment;
+        font-size: 72px;
+        color: #009900;
+    }
+
+    div.spacer
+    {
+        height: 150px;
+    }
+
+    button {
+        background-color: #808080;
+        color: #202020;
+        padding: 50, 100;
+        font-family: retro;
+        font-size: 18px;
+        
+    }
+
+    body {
+        background-color: rgb(0, 0, 0);
+        scroll-behavior: smooth;
+        background-position:center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+
+    }
+</style>
+    <body>
+        <sitetitle>RGB</sitetitle>
+    </body>
+    <script>
+        var body=document.getElementsByTagName('body')[0];
+
+        var red = 0;
+        var green = 0;
+        var blue = 0;
+
+        var redInc = true;
+        var greenInc = 0;
+        var blueInc = 0;
+
+        function updateColor() {
+            body.style.backgroundColor="rgb("+red+", "+green+", "+blue+")";
+            
+            if (redInc == true) {
+                red++;
+            } else if (redInc == false){
+                red--;
+            }
+
+            if (greenInc == true) {
+                green++;
+            } else if (greenInc == false) {
+                green--;
+            }
+
+            if (blueInc == true) {
+                blue++;
+            } else if (blueInc == false) {
+                blue--;
+            }
+
+
+
+            if (red > 254) {
+                redInc = false;
+            } else if (red < 0) {
+                redInc = "wait";
+            }
+
+            if (green > 254) {
+                greenInc = false;
+            } else if (green < 0) {
+                greenInc = "wait";
+            }
+
+            if (blue > 254) {
+                blueInc = false;
+            } else if (blue < 0) {
+                blueInc = "wait";
+            }
+
+
+
+            if (red == 127) {
+                greenInc = true;
+            } else if (green == 127) {
+                blueInc = true;
+            } else if (blue == 127) {
+                redInc = true;
+            }
+
+
+            console.log(red+" "+green+" "+blue)
+
+            setTimeout(updateColor, 10)
+        }
+        updateColor();
+    </script>
+</html>

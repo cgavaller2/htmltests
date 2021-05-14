@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<title>Stopwatch</title>
+<html>
+    <style>
+    @font-face { 
+        font-family: retro;
+        src: url('ka1.TTF'); 
+    }
+
+    sitetitle {
+        font-family: retro;
+        font-size: 48px;
+    }
+
+    div.spacer
+    {
+        height: 150px;
+    }
+
+    button {
+        background-color: #808080;
+        color: #202020;
+        padding: 50, 100;
+        font-family: retro;
+        font-size: 18px;
+        
+    }
+
+    body {
+        background-color: #c4cad3;
+        scroll-behavior: smooth;
+        background-image: linear-gradient(to bottom, #202020, #808080);
+        background-position:center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+
+    }
+</style>
+    <body>
+        <sitetitle>Stopwatch</sitetitle>
+        <div class="spacer"></div>
+        <button onclick="start()">Start</button>
+        <br>
+        <sitetitle id = time></sitetitle>
+    </body>
+    <script>
+            var millis = 0;
+            var seconds = 0;
+            var minutes = 0;
+            var hours = 0;
+            var interval = 1000; // ms
+            var expected = Date.now() + interval;
+                function step() {
+                var dt = Date.now() - expected; // the drift (positive for overshooting)
+                if (dt > interval) {
+                        // something really bad happened. Maybe the browser (tab) was inactive?
+                        // possibly special handling to avoid futile "catch up" run
+                }
+                    
+                millis += 1000;
+    
+                if (millis = 1000) {
+                    millis = 0;
+                    seconds +=1;
+                }
+    
+                if (seconds = 60) {
+                    seconds = 0;
+                    minutes +=1;
+                }
+    
+                if (minutes = 60) {
+                    minutes = 0;
+                    hours +=1;
+                }
+    
+                document.getElementById("time").innerHtml = "ran";
+    
+                expected += interval;
+                setTimeout(step, Math.max(0, interval - dt)); // take into account drift
+            }
+            setTimeout(step, interval);
+    </script>
+</html>

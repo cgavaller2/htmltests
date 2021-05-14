@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<title>Clock</title>
+<html>
+    <style>
+    @font-face { 
+        font-family: retro;
+        src: url('ka1.TTF'); 
+    }
+
+    @font-face { 
+        font-family: sevensegment;
+        src: url('sevensegment.TTF'); 
+    }
+
+    sitetitle {
+        font-family: retro;
+        font-size: 48px;
+    }
+
+    clock {
+        font-family: sevensegment;
+        font-size: 72px;
+        color: #009900;
+    }
+
+    div.spacer
+    {
+        height: 150px;
+    }
+
+    button {
+        background-color: #808080;
+        color: #202020;
+        padding: 50, 100;
+        font-family: retro;
+        font-size: 18px;
+        
+    }
+
+    body {
+        background-color: #c4cad3;
+        scroll-behavior: smooth;
+        background-image: linear-gradient(to bottom, #202020, #808080);
+        background-position:center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+
+    }
+</style>
+    <body>
+        <sitetitle>Today is</sitetitle>
+        <br>
+        <clock id = date></clock>
+        <div class="spacer"></div>
+        <sitetitle>The time is</sitetitle>
+        <br>
+        <clock id = time></clock>
+    </body>
+    <script>
+        var updateRate = 500;
+
+        var hour = 0;
+        var minute = 0;
+        var second = 0;
+
+        var day = 0;
+        var month = 0;
+        var year = 0;
+
+        var formattedTime = 0;
+        var formattedDate = 0;
+
+        divChar = ":";
+        flashDiv = true;
+        divState = true;
+
+        processedTime = 0;
+
+        function updateTime() {
+            date = new Date();
+
+            if (date.getHours() > 12) {
+                hour = date.getHours() - 12;
+            } else {
+                hour = date.getHours();
+            }
+
+            minute = date.getMinutes();
+
+            second = date.getSeconds();
+
+            formattedTime = hour+divChar+minute+divChar+second;
+            formattedTimeNoDiv = hour+" "+minute+" "+second;
+
+            if (flashDiv == true) {
+                if (divState == true) {
+                    processedTime = formattedTime;
+                    divState = false;
+                } else {
+                    processedTime = formattedTimeNoDiv;
+                    divState = true;
+                }
+            } else {
+                processedTime = formattedTime;
+            }
+
+
+            document.getElementById("time").innerHTML = processedTime;
+            setTimeout(updateTime, updateRate);
+        }
+        function updateDate() {
+
+            day = date.getDate();
+            month = date.getMonth()+1;
+            year = date.getYear()+1900;
+
+
+            processedDate = month+"/"+day+"/"+year;
+
+            console.log("year: "+year);
+
+            document.getElementById("date").innerHTML = processedDate;
+            setTimeout(updateDate, updateRate);
+        }
+        updateTime();
+        updateDate();
+    </script>
+</html>

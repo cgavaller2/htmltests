@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<title>fade</title>
+<html>
+    <style>
+    @font-face { 
+        font-family: retro;
+        src: url('ka1.TTF'); 
+    }
+
+    sitetitle {
+        font-family: retro;
+        font-size: 48px;
+    }
+
+    div.spacer
+    {
+        height: 150px;
+    }
+
+    body {
+        background-color: rgb(12,100,50);
+        scroll-behavior: smooth;
+        background-position:center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+
+    }
+</style>
+    <body>
+        <sitetitle>fadein</sitetitle>
+    </body>
+    <script>
+        var body=document.getElementsByTagName('body')[0];
+
+        var red = 0;
+        var green = 0;
+        var blue = 0;
+
+        function updateColor() {
+            body.style.backgroundColor="rgb("+red+", "+green+", "+blue+")";
+            
+            red++;
+            green++;
+            blue++;
+
+            setTimeout(updateColor, 10)
+        }
+        updateColor();
+    </script>
+</html>

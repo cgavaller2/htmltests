@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<title>Bingus</title>
+<html>
+    <style>
+    @font-face { 
+        font-family: retro;
+        src: url('ka1.TTF'); 
+    }
+
+    sitetitle {
+        font-family: retro;
+        font-size: 48px;
+    }
+
+    div.spacer
+    {
+        height: 150px;
+    }
+
+    body {
+        background-color: #c4cad3;
+        scroll-behavior: smooth;
+        background-image:url(bingus.png);
+        background-position:center center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+
+    }
+</style>
+    <body>
+        <sitetitle>Bingus</sitetitle>
+        <div class="spacer"></div>
+        <sitetitle id = main></sitetitle>
+    </body>
+    <script>
+        var bingusCount = 0;
+        function updateBingus() {
+            setTimeout(function() {document.getElementById("main").innerHTML = "Bingus #" + bingusCount; bingusCount++; updateBingus();}, 500);
+        }
+        updateBingus();
+    </script>
+</html>
