@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<title>Clock</title>
+<title>RGB Clock</title>
 <html>
     <style>
     @font-face { 
@@ -77,6 +77,7 @@
         var greenInc = 0;
         var blueInc = 0;
 
+        logColors = false;
 
         function updateTime() {
             date = new Date();
@@ -117,10 +118,7 @@
             month = date.getMonth()+1;
             year = date.getYear()+1900;
 
-
             processedDate = month+"/"+day+"/"+year;
-
-            console.log("year: "+year);
 
             document.getElementById("date").innerHTML = processedDate;
             setTimeout(updateDate, updateRate);
@@ -177,9 +175,10 @@
                 redInc = true;
             }
 
-            console.log(red+" "+green+" "+blue)
-
-            setTimeout(updateColor, 10)
+            if (logColors == true) {
+                console.log(red+" "+green+" "+blue);
+            }
+            setTimeout(updateColor, 0.1)
         }
         updateTime();
         updateDate();
