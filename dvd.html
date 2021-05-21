@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<head>
+    <title>DVD</title>
+</head>
+
+<style>
+    #mainCanvas {
+        image-rendering: crisp-edges;
+    }
+</style>
+
+<body>
+    <img src="dvd.PNG" width="200" height="200" id="dvd"></img>
+    <canvas id="mainCanvas"></canvas>
+</body>
+
+<script>
+    window.onload = function() {
+    var c = document.getElementById("mainCanvas");
+    var ctx = c.getContext("2d");
+    var img = document.getElementById("dvd");
+
+    var width = 1000;
+    var height = 1000;
+
+    c.style.width = width + "px";
+    c.style.height = height + "px";
+
+    function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+    }
+
+
+    var x = getRandomInt(0,1);
+    var y = getRandomInt(0,1)
+
+    var xmov = true;
+    var ymov = true;
+
+    function updateImage() {
+        ctx.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
+        ctx.drawImage(img, x, y);
+
+        if (xmov == true) {
+            x = x+1;
+        } else {
+            x = x-1;
+        }
+
+        if (ymov == true) {
+            y = y+1;
+        } else {
+            y = y-1;
+        }
+
+
+
+        if (x > 50) {
+            xmov = false;
+        } else if (x<0) {
+            xmov = true;
+        }
+
+        if (y > 50) {
+            ymov = false;
+        } else if (y<0) {
+            ymov = true;
+        }
+
+        console.log("X: " + x);
+        console.log("Y: " + y);
+        console.log("Xmov: " + xmov);
+        console.log("Ymov: " + ymov);
+
+
+        setTimeout(updateImage, 50);
+    }
+    updateImage();
+};
+</script>
